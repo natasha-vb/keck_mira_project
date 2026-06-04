@@ -1,0 +1,20 @@
+.. include :: ../README.md
+   :parser: myst_parser.sphinx_
+
+################################
+
+.. toctree::
+   :caption: Table of Contents
+   :maxdepth: 3
+
+   Home <self>
+   Getting Started <content/getting_started>
+   API Documentation <_apidoc/keck_mira_codification>
+   Development guidelines <content/development_guidelines>
+   Configuring services <content/configuring_services>
+   Common Gotchas <content/common_gotchas>
+
+Index
+=====
+* :ref:`genindex`
+* :ref:`modindex`

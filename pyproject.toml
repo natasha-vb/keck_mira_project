@@ -1,0 +1,111 @@
+[project]
+name = "keck_mira_codification"
+version = "0.0.0-dev" # Just a place holder; package version is managed by the dynamic-versioning plugin & git tags
+dynamic = ["version"]
+description = "Code for automating interpretation of Keck's MIRA images"
+authors = [
+    {name = "Van Bemmel, Natasha"}
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "rich~=13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/natasha-vb/keck_mira_project"
+Documentation = "https://keck_mira_codification.readthedocs.io/en/latest/"
+
+[project.optional-dependencies]
+docs = [
+    "Sphinx~=8.0",
+    "sphinx-rtd-theme~=3.0",
+    "sphinx-click~=6.0",
+    "sphinx-copybutton~=0.0",
+    "myst-parser~=4.0",
+]
+dev = [
+    "pytest~=8.0",
+    "pytest-mock~=3.0",
+    "pytest-cookies~=0.0",
+    "pytest-cov~=5.0",
+    "black~=25.0",
+    "ruff~=0.0",
+    "mypy~=1.0",
+    "pre-commit~=4.0",
+]
+
+[tool.poetry]
+packages = [
+    { include = "keck_mira_codification", from = "python" }
+]
+
+# This configures the Poetry plugin which enables dynamic versioning via the repo tags
+# Note the changes that are also needed to the [build-system] config below.
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = ["plugin"] }
+
+[tool.pytest.ini_options]
+addopts = "--cov"
+pythonpath = "./python" # relative to root directory
+
+# Uncomment and edit the following line to add custom markers to your tests
+# These can be run with the following (for example):
+#
+#   $ pytest -m marker_name
+#
+#markers = [ "marker_name: A short description of the marker" ]
+
+[tool.mypy]
+ignore_missing_imports = true
+mypy_path = "$MYPY_CONFIG_FILE_DIR/python"
+
+[tool.coverage.paths]
+source = ["python"]
+
+[tool.coverage.run]
+branch = true
+source = ["python"]
+omit = ["python/keck_mira_codification/tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+  "pragma: no cover",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "if typing.TYPE_CHECKING:"
+]
+
+[tool.ruff]
+line-length = 88 # to match Black
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+]
+ignore = [
+    "E501", # line length violations (let Black handle this)
+]
+
+# Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[build-system]
+requires = ["poetry-core>=2.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
