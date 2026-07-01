@@ -33,5 +33,5 @@ print(date_str)
 try:
     date_weather = df[df['Date'].str.contains(date_str)]
     print(date_weather)
-except:
+except Exception:
     print('Date was not found in weather catalog')

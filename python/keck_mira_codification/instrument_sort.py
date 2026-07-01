@@ -23,8 +23,8 @@ for im in imgs:
             inst = hdr['INSTRUME']
             print(inst)
             print('-INSTRUME keyword used')
-        # except:
-        #     print('no current instrument')
+        except Exception:
+            print('no current instrument')
         print('-' * 15)
         print('')
 
