@@ -1,6 +1,10 @@
 # Keck MIRA Codification
 
-This file will be the README content for your repo and PyPI website as well as the first page of your documentation.  We recommend doing the following:
+Code for the analysis tracking of health of Keck Obvervatory mirror segments via MIRA fits calibration images. 
 
-- Start with a clear, consise and catchy statement about what this codebase is/does
-- Give a quick example showing how to get started with it
+
+## Getting Started
+
+- Get fits header information
+- Sort data into instruments 
+- Read Maunakea weather
