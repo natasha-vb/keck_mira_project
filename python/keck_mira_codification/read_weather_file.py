@@ -14,7 +14,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-# Read in Maunakea weather file from: http://mkwc.ifa.hawaii.edu/current/seeing/analysis/catalog/ 
+# Read in Maunakea weather file from: http://mkwc.ifa.hawaii.edu/current/seeing/analysis/catalog/
 df = pd.read_csv('../../../data/maunakea_weather.txt',sep='\t')
 
 # Read in UT date and transform to searchable format for weather file
@@ -24,7 +24,7 @@ ut_date_split = re.split('-|T', ut_date)
 ut_month = ut_date_split[1]
 month = calendar.month_abbr[int(ut_month)]
 day = int(ut_date_split[2])
-year = int(ut_date_split[0]) 
+year = int(ut_date_split[0])
 
 date_str = f'{month} {day}, {year}'
 print(date_str)

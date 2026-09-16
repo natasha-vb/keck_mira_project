@@ -3,7 +3,7 @@ import glob
 import os
 import shutil
 
-# choose either 'k1' or 'k2' for Keck 1 or Keck 2 
+# choose either 'k1' or 'k2' for Keck 1 or Keck 2
 keck_tel = 'k2'
 
 imgs = glob.glob(f'{keck_tel}/*.fits')
@@ -28,16 +28,14 @@ for im in imgs:
         print('-' * 15)
         print('')
 
-        # save and move to instrument directory 
+        # save and move to instrument directory
         dir_name = f'./{keck_tel}/{inst}'
 
         if not os.path.isdir(dir_name):
             os.makedirs(dir_name)
-        
         shutil.move(im, dir_name+'/'+im.split('/')[1])
         print(f'file moved to {dir_name+'/'+im.split('/')[1]}')
 
     except OSError:
         print('FITS FILE IS EMPTY!')
 
-    
