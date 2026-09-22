@@ -64,4 +64,3 @@ for fname in os.listdir('../../../k1/LRISADC/'):
         print(f'Time taken for Source Extractor: {np.round(time_diff,3)} seconds')
         print('*****************************************************************')
         print()
-        
