@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import regex as re
 
-# choose either 'k1' or 'k2' for Keck 1 or Keck 2 
+# choose either 'k1' or 'k2' for Keck 1 or Keck 2
 # or '*' for both
 keck_tel = '*'
 
@@ -23,18 +23,18 @@ for im in imgs:
         try:
             hdu = fits.open(im)
             hdr = hdu[0].header
-            
-            date = hdr["DATE-OBS"] 
+
+            date = hdr["DATE-OBS"]
             k_tel = im.split('/')[0]
             inst = hdr["INSTRUME"]
             im_name = im.split('/')[-1]
             try:
                 date_obs = hdr["DATE_BEG"]
-            except:
+            except KeyError:
                 date_obs = np.nan
             try:
                 datetime = (hdr["DATE-OBS"] + 'T' + hdr['UTC']).split('.')[0]
-            except:
+            except KeyError:
                 date_obs = np.nan
 
             temp_df = pd.DataFrame({'date':[date], 'datetime':[datetime], 'date_obs':[date_obs], 'telescope':[k_tel], 'instrument':[inst], 'image_name':[im_name]})

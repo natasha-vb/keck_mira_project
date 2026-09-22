@@ -1,13 +1,10 @@
-import glob
 import numpy as np
 import os
-import pandas as pd
-import re
 import subprocess
 import time as t
 
 # SE parameters
-savecats_dir   = f"./cats/"
+savecats_dir   = "./cats/"
 sextractor_loc = "/fred/oz100/containers/commands/sex"
 psfex_loc      = "/fred/oz100/containers/commands/psfex"
 fwhm           = 1.2 #default setting 1.2
@@ -15,10 +12,10 @@ detect_minarea = 5   #default setting 5
 detect_thresh  = 4 #default setting 1.5
 VERBOSE_TYPE   = 'NORMAL'
 
-nnw_path    = f"../default.nnw"
-conv_path   = f"../default.conv"
-config_path = f"../mira.sex"
-params_path = f"../default.param"
+nnw_path    = "../default.nnw"
+conv_path   = "../default.conv"
+config_path = "../mira.sex"
+params_path = "../default.param"
 
 print('CATALOG DIRECTORY: %s\n' % savecats_dir)
 
