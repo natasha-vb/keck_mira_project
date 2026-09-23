@@ -1,18 +1,25 @@
 from astropy.io import fits
+import configparser
 import glob
+
+# read pipeline settings
+config = configparser.ConfigParser()
+config.read("settings.ini")
+
+data_path = config['data']['path']
 
 # choose either 'k1' or 'k2' for Keck 1 or Keck 2
 keck_tel = 'k2'
 
-imgs = glob.glob(f'{keck_tel}/*/*.fits')
+imgs = glob.glob(f'{data_path}/{keck_tel}/*/*.fits')
 
 # clear text file
-with open(f"{keck_tel}/{keck_tel}_header_info.txt", "w") as f:
+with open(f"{data_path}/{keck_tel}/{keck_tel}_header_info.txt", "w") as f:
     f.write("")
 
 # find instrument used in fits header
 for im in imgs:
-    with open(f'{keck_tel}/{keck_tel}_header_info.txt', 'a') as f:
+    with open(f'{data_path}/{keck_tel}/{keck_tel}_header_info.txt', 'a') as f:
         f.write(f'{im}\n')
         try:
             hdu = fits.open(im)
