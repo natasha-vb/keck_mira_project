@@ -1,5 +1,6 @@
 import argparse
 import calendar
+import configparser
 import pandas as pd
 import re
 
@@ -13,9 +14,14 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+# read pipeline settings
+config = configparser.ConfigParser()
+config.read("settings.ini")
+
+data_path = config['data']['path']
 
 # Read in Maunakea weather file from: http://mkwc.ifa.hawaii.edu/current/seeing/analysis/catalog/
-df = pd.read_csv('../../../data/maunakea_weather.txt',sep='\t')
+df = pd.read_csv(f'{data_path}/maunakea_weather.txt',sep='\t')
 
 # Read in UT date and transform to searchable format for weather file
 ut_date = args.date

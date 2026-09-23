@@ -1,12 +1,19 @@
 from astropy.io import fits
+import configparser
 import glob
 import os
 import shutil
 
+# read pipeline settings
+config = configparser.ConfigParser()
+config.read("settings.ini")
+
+data_path = config['data']['path']
+
 # choose either 'k1' or 'k2' for Keck 1 or Keck 2
 keck_tel = 'k2'
 
-imgs = glob.glob(f'{keck_tel}/*.fits')
+imgs = glob.glob(f'{data_path}/{keck_tel}/*.fits')
 
 # find instrument used in fits header
 for im in imgs:
@@ -29,7 +36,7 @@ for im in imgs:
         print('')
 
         # save and move to instrument directory
-        dir_name = f'./{keck_tel}/{inst}'
+        dir_name = f'{data_path}/{keck_tel}/{inst}'
 
         if not os.path.isdir(dir_name):
             os.makedirs(dir_name)

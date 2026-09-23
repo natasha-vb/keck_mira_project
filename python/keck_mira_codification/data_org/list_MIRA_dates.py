@@ -1,14 +1,21 @@
 from astropy.io import fits
+import configparser
 import glob
 import numpy as np
 import pandas as pd
 import regex as re
 
+# read pipeline settings
+config = configparser.ConfigParser()
+config.read("settings.ini")
+
+data_path = config['data']['path']
+
 # choose either 'k1' or 'k2' for Keck 1 or Keck 2
 # or '*' for both
 keck_tel = '*'
 
-imgs = glob.glob(f'{keck_tel}/*/*.fits')
+imgs = glob.glob(f'{data_path}/{keck_tel}/*/*.fits')
 
 dates_df = pd.DataFrame(columns=['date', 'datetime', 'date_obs', 'telescope', 'instrument', 'image_name'])
 
